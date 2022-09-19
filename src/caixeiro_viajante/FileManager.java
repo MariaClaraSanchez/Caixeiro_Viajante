@@ -2,7 +2,8 @@
  *
  * @author Maria Sanchez
  */
-package caixeiroviajante2;
+
+package caixeiro_viajante;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

@@ -1,4 +1,4 @@
-package caixeiroviajante2;
+package caixeiro_viajante;
 
 import java.util.ArrayList;
 

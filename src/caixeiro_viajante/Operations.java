@@ -1,4 +1,4 @@
-package caixeiroviajante2;
+package caixeiro_viajante;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,44 +51,40 @@ public class Operations {
 
         verticesAdj = FindAdjacentVertex(graph, CurrentPosition);
 
-        aux.add(CurrentPosition);
-
+        // aux.add(CurrentPosition);
+        //ArrayList<Integer> aux2 = new ArrayList<>();
+        //aux2.add(CurrentPosition);
         if (AllVerticesTraversed(v, nVertex)) {
             if (graph[CurrentPosition][pos] > 0) {
-                System.err.println(aux);
-
-                if (best.bestWeight >= weight + graph[CurrentPosition][pos]) {
+              //  System.err.println("Antes:" + aux);
+                if (best.bestWeight > weight + graph[CurrentPosition][pos]) {
                     best.bestWeight = weight + graph[CurrentPosition][pos];
-                }
-                //best.bestWeight = Math.min(best.bestWeight, weight + graph[CurrentPosition][pos]);
-                best.paths.clear();
-                for (int i = 0; i < nVertex; i++) {
-                    best.paths.add(aux.get(i));
-                    // System.err.println(aux.get(i));
+                    best.bestWeight = Math.min(best.bestWeight, weight + graph[CurrentPosition][pos]);
+                    best.paths.clear();
+                    aux.add(pos);
+                    for (int i = 0; i < nVertex; i++) {
+                        best.paths.add(aux.get(i));
+                        // System.err.println(aux.get(i));
+                    }
+                    aux.remove(aux.size() - 1);
                 }
 
-                // System.out.println("Teste" + count + " " + aux.get(5));
                 return best;
-
-                //aux = null;]
             }
-            // System.out.print("1º : " + CurrentPosition + "\n");
-
         }
-        
         // BACKTRACKING
         for (int i = 0; i < verticesAdj.size(); i++) {
             if (v[verticesAdj.get(i)] == false) {
 
                 v[verticesAdj.get(i)] = true;
+                aux.add(verticesAdj.get(i));
 
                 best = hamiltonianCycle(graph, v, verticesAdj.get(i), nVertex,
                         weight + graph[CurrentPosition][verticesAdj.get(i)], best.bestWeight, best, aux, pos);
-                //aux = null;
-                // System.out.print("\n2º: " + CurrentPosition + "\n");
-                //aux.remove(CurrentPosition);
-                //v[verticesAdj.get(i)] = false;
+
                 v[verticesAdj.get(i)] = false;
+                aux.remove(verticesAdj.get(i));
+
             }
         }
         return best;

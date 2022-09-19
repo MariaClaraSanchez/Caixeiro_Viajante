@@ -1,14 +1,11 @@
-package caixeiroviajante2;
+package caixeiro_viajante;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Maria Sanchez
  */
-
-
-public class CaixeiroViajante2 {
+public class Caixeiro_Viajante{
 
     public static void main(String[] args) {
         /* Leitura do arquivo */
@@ -24,25 +21,25 @@ public class CaixeiroViajante2 {
             }
             System.out.println();
         }
-        
+
         BestPath bestpath = new BestPath();
         ArrayList<Integer> aux = new ArrayList<>();
         int nVertex = graph.length;
-        
+
         boolean[] vertices = new boolean[nVertex];
 
-		// vertices[0] = true;
-		for (int i = 0; i < nVertex; i++) {
-			vertices[i] = false;
-		}
-        
+        // vertices[0] = true;
+        for (int i = 0; i < nVertex; i++) {
+            vertices[i] = false;
+        }
+
         int va  = 3;
         vertices[va] = true;
         int pos = va;
-       
+
         bestpath = Operations.hamiltonianCycle(graph, vertices, va, nVertex, 1, bestpath.bestWeight, bestpath, aux, pos);
         
-        System.out.println("\n Menor peso: " + bestpath.bestWeight);
+        System.out.println("\n Menor peso: " + (bestpath.bestWeight-1));
         System.out.println("\n Caminho: " + bestpath.paths);
 
     }
