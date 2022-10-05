@@ -11,18 +11,19 @@ class BestPath {
 
 public class Operations {
 
-    public static List<Integer> FindAdjacentVertex(int graph[][], int CurrentPosition) {
+	public static List<Integer> FindAdjacentVertex(int graph[][], int CurrentPosition) {
 
-        List<Integer> vertices = new ArrayList<Integer>();
+		List<Integer> vertices = new ArrayList<Integer>();
 
-        for (int i = 0; i < graph.length; i++) {
-            if (CurrentPosition != i && graph[CurrentPosition][i] != 0) {
-                vertices.add(i);
-            }
-        }
+		for (int i = 0; i < graph.length; i++) {
 
-        return vertices;
-    }
+			if (CurrentPosition != i && graph[CurrentPosition][i] != -1) {
+				vertices.add(i);
+			}
+		}
+
+		return vertices;
+	}
 
     public static boolean AllVerticesTraversed(boolean[] vertices, int size) {
         int cont = 0;

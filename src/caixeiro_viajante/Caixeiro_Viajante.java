@@ -9,52 +9,62 @@ public class Caixeiro_Viajante{
 
     public static void main(String[] args) {
         
-    	/* Leitura do arquivo */
+    	/* ************ Leitura do arquivo ************ */
         CreationGraph cGr = new CreationGraph();
-        ArrayList<String> text = cGr.ler("./data/Teste.txt");
+        ArrayList<String> text = cGr.ler("./data/Teste3.txt");
 
-        int graph[][] = cGr.graph(text);
-
-        for (int[] graph1 : graph) {
-            for (int j = 0; j < graph.length; j++) {
+        int graphInicial[][] = cGr.graph(text);
+        for (int[] graph1 : graphInicial) {
+            for (int j = 0; j < graphInicial.length; j++) {
                 System.out.print(" " + graph1[j] + " ");
             }
             System.out.println();
         }
 
-        
-        /* DeclraÁ„o das Variaveis*/
+        /* ************ Declaracao das variaveis ************ */
+        int graphMax[][] = new int[11][11];
+        int nVertex = graphMax.length;
+
         BestPath bestpath = new BestPath();
         ArrayList<Integer> aux = new ArrayList<>();
-        int nVertex = graph.length;
+       
         boolean[] vertices = new boolean[nVertex];
-
+        int va  = 0;
+        int pos = va;
         
-        // Atribuindo todos vertices como false, p·ra sinalizar n„o visitados!
+		// Atribui√ß√£o da quantidade de caminhos a serem utilizados
+		for (int i = 0; i < nVertex; i++) {
+			for (int j = 0; j < nVertex; j++) {
+				graphMax[i][j] = graphInicial[i][j];
+			}
+		}
+        
+        // Atribuindo todos vertices como false, para sinalizar no visitados!
         for (int i = 0; i < nVertex; i++) {
             vertices[i] = false;
         }
-
-        int va  = 3;
+        
+        // Qual o vertices escolhido como origem
         vertices[va] = true;
-        int pos = va;
+
         
+        /* ************ Chamada do algoritmo √≥timo ************ */
         
-        /* Chamada do algoritmo Ûtimo*/
-        
-		// Inicio da contagem do tempo
+        /* Inicio da contagem do tempo */
 		long start = System.currentTimeMillis();
 		
-        bestpath = Operations.hamiltonianCycle(graph, vertices, va, nVertex, 1, bestpath.bestWeight, bestpath, aux, pos);
+        bestpath = Operations.hamiltonianCycle(graphMax, vertices, va, nVertex, 1, bestpath.bestWeight, bestpath, aux, pos);
        
 		long end = System.currentTimeMillis();
-		// Fim da contagem do tempo
+		/* Fim da contagem do tempo */
         
 		/* Contagem da memoria */
 		int dataSize = 1024 * 1024;
 		Runtime runtime = Runtime.getRuntime();
+
+		/* ************ Sa√≠das ************ */
 		
-		System.out.printf("\n Tempo de ExecuÁ„o: %.3f ms%n", (end - start) / 1000d);
+		System.out.printf("\n Tempo de Execucaoo: %.2f ms %n", (end - start) / 1000d);
 		System.out.println("\n Memoria usada: " + (runtime.totalMemory() - runtime.freeMemory()) / dataSize + "MB");
         System.out.println("\n Melhor Caminho: " + bestpath.paths);
         System.out.println("\n Menor Esforco: " + (bestpath.bestWeight-1));

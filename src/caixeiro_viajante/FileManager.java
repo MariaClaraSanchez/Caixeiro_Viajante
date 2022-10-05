@@ -1,6 +1,6 @@
 /**
  *
- * @author Maria Sanchez
+ * @author Douglas
  */
 
 package caixeiro_viajante;
